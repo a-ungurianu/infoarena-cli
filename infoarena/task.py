@@ -1,21 +1,10 @@
-from bs4 import BeautifulSoup
-import urllib.request
+from . import utils
 import re
 
 ROOT_URL = "http://www.infoarena.ro"
 ARCHIVE_URL = ROOT_URL + "/arhiva"
 
 PROBLEM_ROOT_URL = ROOT_URL + "/problema"
-
-USER_AGENT = "Mozilla/5.0 (X11; U; Linux i686) Gecko/20071127 Firefox/2.0.0.11"
-
-def get_soup_from_url(url):
-    request = urllib.request.Request(url,headers={"User-Agent":USER_AGENT})
-    html_doc = urllib.request.urlopen(request)
-    html_doc = html_doc.read()
-
-    soup = BeautifulSoup(html_doc,'html.parser')
-    return soup
 
 class Task(object):
     def __init__(self,name):
@@ -29,7 +18,7 @@ class Task(object):
 
     def retrieve_data(self):
         url = PROBLEM_ROOT_URL + "/" + self.name
-        page = get_soup_from_url(url)
+        page = utils.get_soup_from_url(url)
         self.data = {}
 
         problem_data_block = page.find(id="main").find(class_="wiki_text_block")
