@@ -1,8 +1,5 @@
-from . import utils
+from .utils import ROOT_URL,get_soup_from_url
 import re
-
-ROOT_URL = "http://www.infoarena.ro"
-ARCHIVE_URL = ROOT_URL + "/arhiva"
 
 PROBLEM_ROOT_URL = ROOT_URL + "/problema"
 
@@ -18,7 +15,7 @@ class Task(object):
 
     def retrieve_data(self):
         url = PROBLEM_ROOT_URL + "/" + self.name
-        page = utils.get_soup_from_url(url)
+        page = get_soup_from_url(url)
         self.data = {}
 
         problem_data_block = page.find(id="main").find(class_="wiki_text_block")
