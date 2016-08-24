@@ -1,14 +1,12 @@
 from bs4 import BeautifulSoup
-import urllib.request
+import requests
 
-USER_AGENT = "Mozilla/5.0 (X11; U; Linux i686) Gecko/20071127 Firefox/2.0.0.11"
+USER_AGENT = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:48.0) Gecko/20100101 Firefox/48.0"
 
 ROOT_URL = "http://www.infoarena.ro"
 
-def get_soup_from_url(url):
-    request = urllib.request.Request(url,headers={"User-Agent":USER_AGENT})
-    html_doc = urllib.request.urlopen(request)
-    html_doc = html_doc.read()
 
-    soup = BeautifulSoup(html_doc,'html.parser')
+def get_soup_from_url(url):
+    response = requests.get(url,headers={"User-Agent":USER_AGENT})
+    soup = BeautifulSoup(response.text,'html.parser')
     return soup

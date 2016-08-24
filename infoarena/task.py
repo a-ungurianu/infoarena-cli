@@ -18,6 +18,12 @@ class Task(object):
             self.retrieve_data()
         return self.title
 
+    def get_input_description(self):
+        if not self.data_retrieved:
+            self.retrieve_data()
+        return self.input_description
+
+
     def retrieve_data(self):
         url = PROBLEM_ROOT_URL + "/" + self.name
         page = get_soup_from_url(url)
@@ -48,4 +54,4 @@ class Task(object):
                 self.description += "\n" + maybe_para_header.get_text() + "\n\n"
             self.description += paragraph.get_text().strip() + "\n"
 
-        data_retrieved = True
+        self.data_retrieved = True
