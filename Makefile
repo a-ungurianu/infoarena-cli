@@ -1,5 +1,5 @@
-.PHONEY: test
+.PHONEY: scrap
 
-test:
+scrap:
 	cd tests && \
 	python3 scrapbook.py
