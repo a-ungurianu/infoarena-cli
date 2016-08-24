@@ -8,5 +8,5 @@ ROOT_URL = "http://www.infoarena.ro"
 
 def get_soup_from_url(url):
     response = requests.get(url,headers={"User-Agent":USER_AGENT})
-    soup = BeautifulSoup(response.text,'html.parser')
+    soup = BeautifulSoup(response.text,'lxml')
     return soup
