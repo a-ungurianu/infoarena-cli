@@ -22,7 +22,15 @@ class TaskList(object):
         tasks = []
         for row in task_table.find("tbody").findAll("tr"):
             id = int(row.find(class_="number").get_text(),10)
-            name = row.find(class_="task").find("a")["href"].split("/")[-1]
-            tasks.append(Task(name))
+            link = row.find(class_="task").find("a")
+            name = link["href"].split("/")[-1]
+            new_task = Task(name)
+            new_task.title = link.get_text().strip()
+            tasks.append(new_task)
 
         return tasks
+
+EducationalTaskList = TaskList(ARCHIVE_URLS["educational"])
+ProblemTaskList = TaskList(ARCHIVE_URLS["problems"])
+MonthlyTaskList = TaskList(ARCHIVE_URLS["monthly"])
+ACMTaskList = TaskList(ARCHIVE_URLS["acm"])
