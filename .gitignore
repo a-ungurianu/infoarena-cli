@@ -4,5 +4,6 @@ lib/
 lib64
 share/
 pip-selfcheck.json
+tests/scrapbook.py
 
 **/__pycache__/
