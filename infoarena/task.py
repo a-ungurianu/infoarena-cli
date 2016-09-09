@@ -9,7 +9,8 @@ class Task(object):
     Task is identified by id/name (the id used by the site to reference the problem)
     Data is being loaded lazily so object initialization doesn't infer any cost.
     """
-    def __init__(self,name):
+    def __init__(self,name,session):
+        self.session = session
         self.name = name
 
     @property
@@ -59,7 +60,7 @@ class Task(object):
 
     def _retrieve_data(self):
         url = PROBLEM_ROOT_URL + "/" + self.name
-        page = get_soup_from_url(url)
+        page = self.session.get_soup_from_url(url)
 
         problem_data_block = page.find(id="main").find(class_="wiki_text_block")
 

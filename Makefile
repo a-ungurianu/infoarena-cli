@@ -5,3 +5,7 @@
 scrap:
 	cd tests && \
 	python3 scrapbook.py
+
+test:
+	cd tests && \
+	python3 test_loggedinornot.py

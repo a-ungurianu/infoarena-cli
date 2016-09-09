@@ -12,7 +12,8 @@ class User(object):
     Users, just for retrieving specific data.
     """
 
-    def __init__(self,username):
+    def __init__(self,username,session):
+        self.session = session
         self.username = username
 
     @property
@@ -29,7 +30,7 @@ class User(object):
     def rating(self):
         if not hasattr(self,"_rating"):
             self._retrieve_data()
-        return self._name
+        return self._rating
 
     @rating.setter
     def rating(self,rating):
@@ -47,10 +48,16 @@ class User(object):
             self._retrieve_data()
         return self._tried_tasks
 
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "<User name={name}>".format(name=self.username)
+
     def _retrieve_data(self):
         """ This function does most of the work, retrieving data from the site. """
         # Retrieve the soup of the user page
-        soup = get_soup_from_url(USER_ROOT.format(user=self.username))
+        soup = self.session.get_soup_from_url(USER_ROOT.format(user=self.username))
 
         # Find the user badge that each account page has and retrieve relevant
         # information from there
@@ -93,5 +100,5 @@ class User(object):
         solved_problems = all_problems - tried_problems
 
         # Construct Task objects for each tasks and assign them to our object
-        self._solved_tasks = list(map(Task,solved_problems))
-        self._tried_tasks = list(map(Task,tried_problems))
+        self._solved_tasks = list(map(lambda task_name: Task(task_name,self.session),solved_problems))
+        self._tried_tasks = list(map(lambda task_name: Task(task_name,self.session),tried_problems))
