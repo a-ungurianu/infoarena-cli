@@ -35,7 +35,7 @@ class TaskList(object):
             name = link["href"].split("/")[-1]
             # The task table already contains the title of the task, so might
             # as well initialize it.
-            new_task = Task(name,self.session)
+            new_task = self.session.get_task(name)
             new_task.title = link.get_text().strip()
             tasks.append(new_task)
 

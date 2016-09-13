@@ -16,6 +16,9 @@ class IASession(object):
         soup = BeautifulSoup(response.text,'lxml')
         return soup
 
+    # This is doing a kind of dependency injection by adding the Session service
+    # to the object on construction
+
     def get_task(self,task_id):
         return Task(task_id,self)
 

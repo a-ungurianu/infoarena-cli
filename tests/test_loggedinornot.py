@@ -54,7 +54,6 @@ class TestLoginDoesntDiffer(unittest.TestCase):
 
         self.assertEqual(logged_tasks,def_tasks)
 
-
 if __name__ == "__main__":
     username = input("Enter username to test: ")
     password = input("Enter password to test: ")
