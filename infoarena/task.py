@@ -93,3 +93,7 @@ class Task(object):
             if maybe_para_header.name == "h2":
                 self._description += "\n" + maybe_para_header.get_text() + "\n\n"
             self._description += paragraph.get_text().strip() + "\n"
+
+
+class AuthTask(Task):
+    pass

@@ -5,7 +5,7 @@ import sys
 sys.path.insert(0, os.path.abspath('..'))
 
 from infoarena import user,tasklist
-from infoarena.session import IASession
+from infoarena.session import IASession, IAAuthSession
 
 # These are tests to check if the output of stuff is the same if logged in or not.
 
@@ -15,7 +15,7 @@ password = None
 
 class TestLoginDoesntDiffer(unittest.TestCase):
     def setUp(self):
-        self.logged_in_sess = IASession(username,password)
+        self.logged_in_sess = IAAuthSession(username,password)
         self.not_logged_in_sess = IASession()
 
     def test_is_user_same(self):

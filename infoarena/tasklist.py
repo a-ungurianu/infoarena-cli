@@ -40,3 +40,6 @@ class TaskList(object):
             tasks.append(new_task)
 
         return tasks
+
+class AuthTaskList(TaskList):
+    pass

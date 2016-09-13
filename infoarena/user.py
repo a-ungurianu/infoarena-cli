@@ -102,3 +102,7 @@ class User(object):
         # Construct Task objects for each tasks and assign them to our object
         self._solved_tasks = list(map(lambda task_name: Task(task_name,self.session),solved_problems))
         self._tried_tasks = list(map(lambda task_name: Task(task_name,self.session),tried_problems))
+
+
+class AuthUser(User):
+    pass
