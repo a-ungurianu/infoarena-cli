@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 from .utils import USER_AGENT
 from .task import Task
+from .tasklist import TaskList
 from .user import User
 
 
@@ -35,9 +36,11 @@ class IASession(object):
         soup = BeautifulSoup(response.text,'lxml')
         return soup
 
-
     def get_task(self,task_id):
         return Task(task_id,self)
 
     def get_user(self,username):
         return User(username,self)
+
+    def get_tasklist(self,taskUrl):
+        return TaskList(taskUrl,self)

@@ -45,8 +45,17 @@ class TestLoginDoesntDiffer(unittest.TestCase):
         self.assertEqual(log_task.output_description,def_task.output_description, "Output description differs")
 
 
-if __name__ == "__main__":
+    def test_is_task_list_same(self):
+        log_list = self.logged_in_sess.get_tasklist(tasklist.TaskListURL.PROBLEMS)
+        def_list = self.not_logged_in_sess.get_tasklist(tasklist.TaskListURL.PROBLEMS)
 
+        logged_tasks = sorted(map(lambda task:task.name,log_list.get_tasks(0,20)))
+        def_tasks = sorted(map(lambda task:task.name,def_list.get_tasks(0,20)))
+
+        self.assertEqual(logged_tasks,def_tasks)
+
+
+if __name__ == "__main__":
     username = input("Enter username to test: ")
     password = input("Enter password to test: ")
     unittest.main()
