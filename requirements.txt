@@ -1,5 +1,5 @@
 beautifulsoup4==4.4.1
 lxml==3.6.4
 requests==2.10.0
-urllib3==1.13.1
+urllib3==1.26.5
 virtualenv==15.0.1
